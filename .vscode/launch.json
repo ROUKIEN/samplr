@@ -7,34 +7,37 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'workshop-reservoir-sampling'",
+            "name": "Debug executable 'samplr'",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=workshop-reservoir-sampling",
-                    "--package=workshop-reservoir-sampling"
+                    "--bin=samplr",
+                    "--package=samplr"
                 ],
                 "filter": {
-                    "name": "workshop-reservoir-sampling",
+                    "name": "samplr",
                     "kind": "bin"
                 }
             },
-            "args": [],
+            "args": [
+                "tests/input/60K_lines.csv",
+                "100"
+            ],
             "cwd": "${workspaceFolder}"
         },
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in executable 'workshop-reservoir-sampling'",
+            "name": "Debug unit tests in executable 'samplr'",
             "cargo": {
                 "args": [
                     "test",
                     "--no-run",
-                    "--bin=workshop-reservoir-sampling",
-                    "--package=workshop-reservoir-sampling"
+                    "--bin=samplr",
+                    "--package=samplr"
                 ],
                 "filter": {
-                    "name": "workshop-reservoir-sampling",
+                    "name": "samplr",
                     "kind": "bin"
                 }
             },
