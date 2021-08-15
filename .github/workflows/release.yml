@@ -17,8 +17,14 @@ jobs:
       - name: build samplr binary
         run: cargo build --release
       - uses: actions/upload-artifact@v2
+        if: ${{ matrix.os == 'windows-latest' }}
         with:
-          name: samplr-${{ matrix.os }}
+          name: samplr-windows-${{ github.ref }}
+          path: target/release/samplr.exe
+      - uses: actions/upload-artifact@v2
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        with:
+          name: samplr-linux-${{ github.ref }}
           path: target/release/samplr
 
   release:
@@ -41,10 +47,10 @@ jobs:
 
       - uses: actions/download-artifact@v2
         with:
-          name: samplr-windows-latest
+          name: samplr-windows-${{ github.ref }}
 
       - uses: actions/download-artifact@v2
         with:
-          name: samplr-ubuntu-latest
+          name: samplr-linux-${{ github.ref }}
 
       # to be continued...
