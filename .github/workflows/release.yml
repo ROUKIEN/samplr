@@ -19,12 +19,12 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: ${{ matrix.os == 'windows-latest' }}
         with:
-          name: samplr-windows-${{ github.ref }}
+          name: samplr-windows
           path: target/release/samplr.exe
       - uses: actions/upload-artifact@v2
         if: ${{ matrix.os == 'ubuntu-latest' }}
         with:
-          name: samplr-linux-${{ github.ref }}
+          name: samplr-linux
           path: target/release/samplr
 
   release:
@@ -36,7 +36,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
@@ -47,10 +47,10 @@ jobs:
 
       - uses: actions/download-artifact@v2
         with:
-          name: samplr-windows-${{ github.ref }}
+          name: samplr-windows
 
       - uses: actions/download-artifact@v2
         with:
-          name: samplr-linux-${{ github.ref }}
+          name: samplr-linux
 
       # to be continued...
