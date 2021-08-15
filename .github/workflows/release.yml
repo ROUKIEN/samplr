@@ -5,6 +5,10 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  # allow the workflow to get code and upload artifacts
+  contents: write
+
 jobs:
   build:
     name: Build (${{ matrix.os }})
@@ -48,9 +52,17 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: samplr-windows
+          path: samplr-windows
 
       - uses: actions/download-artifact@v2
         with:
           name: samplr-linux
+          path: samplr-linux
 
-      # to be continued...
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: |
+            samplr-linux/samplr
+            samplr-windows/samplr.exe
