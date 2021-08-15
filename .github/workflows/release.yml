@@ -15,7 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: build samplr binary
-        id: build_${{ matrix.os }}
         run: cargo build --release
       - uses: actions/upload-artifact@v2
         with:
